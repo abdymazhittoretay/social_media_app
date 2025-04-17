@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -22,7 +24,14 @@ class WelcomePage extends StatelessWidget {
                 Icon(Icons.abc, size: 120.0),
                 Text("Welcome to our app!", textAlign: TextAlign.center),
                 Spacer(),
-                ElevatedButton(onPressed: () {}, child: Text("Register")),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).primaryColor,
+                    foregroundColor: Theme.of(context).secondaryHeaderColor,
+                  ),
+                  onPressed: () {},
+                  child: Text("Register"),
+                ),
                 SizedBox(height: 6.0),
                 ElevatedButton(onPressed: () {}, child: Text("Sign Up")),
               ],
