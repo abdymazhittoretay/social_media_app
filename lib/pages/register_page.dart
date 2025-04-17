@@ -24,6 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Spacer(),
               TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
@@ -46,6 +47,16 @@ class _RegisterPageState extends State<RegisterPage> {
                   hintText: "Confirm password",
                   border: OutlineInputBorder(),
                 ),
+              ),
+              Spacer(),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(double.maxFinite, 50),
+                  backgroundColor: Theme.of(context).primaryColor,
+                  foregroundColor: Theme.of(context).secondaryHeaderColor,
+                ),
+                onPressed: () {},
+                child: Text("Register"),
               ),
             ],
           ),
