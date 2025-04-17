@@ -31,6 +31,7 @@ class _SignInPageState extends State<SignInPage> {
               SizedBox(height: 12.0),
               TextField(
                 controller: _passwordController,
+                obscureText: true,
                 decoration: InputDecoration(
                   hintText: "Your email",
                   border: OutlineInputBorder(),
