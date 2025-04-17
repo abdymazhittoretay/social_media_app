@@ -26,6 +26,7 @@ class _SignInPageState extends State<SignInPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Spacer(),
                 TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
@@ -41,6 +42,14 @@ class _SignInPageState extends State<SignInPage> {
                     hintText: "Your email",
                     border: OutlineInputBorder(),
                   ),
+                ),
+                Spacer(),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(double.maxFinite, 50),
+                  ),
+                  onPressed: () {},
+                  child: Text("Sign In"),
                 ),
               ],
             ),
