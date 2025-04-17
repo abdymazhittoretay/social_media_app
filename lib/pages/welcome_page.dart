@@ -12,8 +12,13 @@ class WelcomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Spacer(),
             Icon(Icons.abc, size: 120.0),
             Text("Welcome to our app!", textAlign: TextAlign.center),
+            Spacer(),
+            ElevatedButton(onPressed: () {}, child: Text("Register")),
+            SizedBox(height: 6.0),
+            ElevatedButton(onPressed: () {}, child: Text("Sign Up")),
           ],
         ),
       ),
