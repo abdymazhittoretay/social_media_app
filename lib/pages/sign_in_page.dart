@@ -39,7 +39,7 @@ class _SignInPageState extends State<SignInPage> {
                   controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
-                    hintText: "Your email",
+                    hintText: "Your password",
                     border: OutlineInputBorder(),
                   ),
                 ),
