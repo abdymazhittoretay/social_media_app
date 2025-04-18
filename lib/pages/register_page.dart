@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:social_media_app/services/auth_service.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -61,7 +63,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     backgroundColor: Theme.of(context).primaryColor,
                     foregroundColor: Theme.of(context).secondaryHeaderColor,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    register(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                      confirmPassword: _confirmPasswordController.text,
+                    );
+                  },
                   child: Text("Register"),
                 ),
               ],
@@ -70,5 +78,26 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+
+  Future<void> register({
+    required String email,
+    required String password,
+    required String confirmPassword,
+  }) async {
+    if (email.isNotEmpty && password.isNotEmpty && confirmPassword.isNotEmpty) {
+      if (password == confirmPassword) {
+        try {
+          await authService.value.registerUserWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+        } on FirebaseAuthException catch (e) {
+          print(e.message);
+        }
+      }
+    } else {
+      print("One of the fields is empty");
+    }
   }
 }
