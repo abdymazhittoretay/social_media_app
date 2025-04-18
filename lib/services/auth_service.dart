@@ -10,6 +10,16 @@ class AuthService {
 
   Stream<User?> get authState => _instance.authStateChanges();
 
+  Future<void> registerUserWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    await _instance.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
+
   Future<void> signInWithEmailAndPassword({
     required String email,
     required String password,
