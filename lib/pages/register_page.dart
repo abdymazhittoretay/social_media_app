@@ -14,6 +14,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  String errorMessage = "";
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,8 @@ class _RegisterPageState extends State<RegisterPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Spacer(),
+                Text(errorMessage, style: TextStyle(color: Colors.red)),
+                SizedBox(height: 6.0),
                 TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
@@ -93,11 +96,20 @@ class _RegisterPageState extends State<RegisterPage> {
             password: password,
           );
         } on FirebaseAuthException catch (e) {
-          print(e.message);
+          setState(() {
+            errorMessage = e.message as String;
+          });
         }
+      } else {
+        setState(() {
+          errorMessage = "Passwords don't match";
+        });
       }
     } else {
-      print("One of the fields is empty");
+      await Future.delayed(Durations.long4);
+      setState(() {
+        errorMessage = "One of the fields is empty";
+      });
     }
   }
 
