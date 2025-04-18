@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:social_media_app/services/auth_service.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -48,7 +50,12 @@ class _SignInPageState extends State<SignInPage> {
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(double.maxFinite, 50),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    signIn(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                    );
+                  },
                   child: Text("Sign In"),
                 ),
               ],
@@ -57,5 +64,20 @@ class _SignInPageState extends State<SignInPage> {
         ),
       ),
     );
+  }
+
+  Future<void> signIn({required String email, required String password}) async {
+    if (email.isNotEmpty && password.isNotEmpty) {
+      try {
+        await authService.value.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+      } on FirebaseAuthException catch (e) {
+        print(e.message);
+      }
+    } else {
+      print("One of the fields is empty");
+    }
   }
 }
