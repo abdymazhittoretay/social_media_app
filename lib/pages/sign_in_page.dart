@@ -96,4 +96,11 @@ class _SignInPageState extends State<SignInPage> {
       if (mounted) Navigator.pop(context);
     }
   }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 }
