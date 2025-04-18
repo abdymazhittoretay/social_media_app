@@ -24,10 +24,23 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Spacer(),
                 Icon(Icons.person, size: 120.0),
                 Text(
                   authService.value.currentUser!.email ??
                       "-Place for your email-",
+                ),
+                Spacer(),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).primaryColor,
+                    foregroundColor: Theme.of(context).secondaryHeaderColor,
+                  ),
+                  onPressed: () async {
+                    await authService.value.signOut();
+                    if (context.mounted) Navigator.pop(context);
+                  },
+                  child: Text("Sign Out"),
                 ),
               ],
             ),
