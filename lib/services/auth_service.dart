@@ -9,4 +9,14 @@ class AuthService {
   User? get currentUser => _instance.currentUser;
 
   Stream<User?> get authState => _instance.authStateChanges();
+
+  Future<void> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    await _instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
 }
