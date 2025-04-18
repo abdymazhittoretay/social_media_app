@@ -100,4 +100,12 @@ class _RegisterPageState extends State<RegisterPage> {
       print("One of the fields is empty");
     }
   }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
 }
