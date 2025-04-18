@@ -78,7 +78,10 @@ class _SignInPageState extends State<SignInPage> {
           email: email,
           password: password,
         );
-        if (mounted) Navigator.pop(context);
+        if (mounted) {
+          Navigator.pop(context);
+          Navigator.pop(context);
+        }
       } on FirebaseAuthException catch (e) {
         setState(() {
           errorMessage = e.message as String;
