@@ -13,6 +13,7 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  String errorMessage = "";
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,8 @@ class _SignInPageState extends State<SignInPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Spacer(),
+                Text(errorMessage, style: TextStyle(color: Colors.red)),
+                SizedBox(height: 6.0),
                 TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
@@ -77,12 +80,16 @@ class _SignInPageState extends State<SignInPage> {
         );
         if (mounted) Navigator.pop(context);
       } on FirebaseAuthException catch (e) {
-        print(e.message);
+        setState(() {
+          errorMessage = e.message as String;
+        });
         if (mounted) Navigator.pop(context);
       }
     } else {
       await Future.delayed(Durations.long4);
-      print("One of the fields is empty");
+      setState(() {
+        errorMessage = "One of the fields is empty";
+      });
       if (mounted) Navigator.pop(context);
     }
   }
