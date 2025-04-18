@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:social_media_app/helper_widgets.dart';
 import 'package:social_media_app/services/auth_service.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -67,6 +68,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     foregroundColor: Theme.of(context).secondaryHeaderColor,
                   ),
                   onPressed: () {
+                    loadDialog(context);
                     register(
                       email: _emailController.text,
                       password: _passwordController.text,
@@ -95,21 +97,26 @@ class _RegisterPageState extends State<RegisterPage> {
             email: email,
             password: password,
           );
+          if (mounted) Navigator.pop(context);
         } on FirebaseAuthException catch (e) {
           setState(() {
             errorMessage = e.message as String;
           });
+          if (mounted) Navigator.pop(context);
         }
       } else {
+        await Future.delayed(Durations.long4);
         setState(() {
           errorMessage = "Passwords don't match";
         });
+        if (mounted) Navigator.pop(context);
       }
     } else {
       await Future.delayed(Durations.long4);
       setState(() {
         errorMessage = "One of the fields is empty";
       });
+      if (mounted) Navigator.pop(context);
     }
   }
 
