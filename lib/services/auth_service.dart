@@ -33,4 +33,8 @@ class AuthService {
   Future<void> signOut() async {
     await _instance.signOut();
   }
+
+  Future<void> updateUsername({required String newUsername}) async {
+    currentUser!.updateDisplayName(newUsername);
+  }
 }
