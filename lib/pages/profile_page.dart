@@ -27,10 +27,9 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 Spacer(),
                 Icon(Icons.person, size: 120.0),
-                Text(
-                  authService.value.currentUser!.email ??
-                      "-Place for your email-",
-                ),
+                Text(authService.value.currentUser!.displayName ?? ""),
+                SizedBox(height: 6.0),
+                Text(authService.value.currentUser!.email ?? ""),
                 Spacer(),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
