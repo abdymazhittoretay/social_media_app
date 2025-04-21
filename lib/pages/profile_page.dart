@@ -31,6 +31,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       "-Place for your email-",
                 ),
                 Spacer(),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text("Update username"),
+                  trailing: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.arrow_forward_ios),
+                  ),
+                ),
+                Spacer(),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).primaryColor,
