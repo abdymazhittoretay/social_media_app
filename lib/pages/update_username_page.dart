@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_media_app/services/auth_service.dart';
 
 class UpdateUsernamePage extends StatefulWidget {
   const UpdateUsernamePage({super.key});
@@ -38,7 +39,9 @@ class _UpdateUsernamePageState extends State<UpdateUsernamePage> {
                     backgroundColor: Theme.of(context).primaryColor,
                     foregroundColor: Theme.of(context).secondaryHeaderColor,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    updateUsername(newUsername: _controller.text);
+                  },
                   child: Text("Update"),
                 ),
               ],
@@ -47,6 +50,14 @@ class _UpdateUsernamePageState extends State<UpdateUsernamePage> {
         ),
       ),
     );
+  }
+
+  Future<void> updateUsername({required String newUsername}) async {
+    if (newUsername.isNotEmpty) {
+      await authService.value.updateUsername(newUsername: newUsername);
+    } else {
+      print("Field is empty");
+    }
   }
 
   @override
