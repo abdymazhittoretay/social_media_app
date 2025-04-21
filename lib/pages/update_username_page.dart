@@ -32,6 +32,15 @@ class _UpdateUsernamePageState extends State<UpdateUsernamePage> {
                     border: OutlineInputBorder(),
                   ),
                 ),
+                SizedBox(height: 12.0),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).primaryColor,
+                    foregroundColor: Theme.of(context).secondaryHeaderColor,
+                  ),
+                  onPressed: () {},
+                  child: Text("Update"),
+                ),
               ],
             ),
           ),
