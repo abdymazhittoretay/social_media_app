@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_media_app/helper_widgets.dart';
 import 'package:social_media_app/services/auth_service.dart';
 
 class UpdateUsernamePage extends StatefulWidget {
@@ -40,6 +41,7 @@ class _UpdateUsernamePageState extends State<UpdateUsernamePage> {
                     foregroundColor: Theme.of(context).secondaryHeaderColor,
                   ),
                   onPressed: () {
+                    loadDialog(context);
                     updateUsername(newUsername: _controller.text);
                   },
                   child: Text("Update"),
@@ -55,8 +57,14 @@ class _UpdateUsernamePageState extends State<UpdateUsernamePage> {
   Future<void> updateUsername({required String newUsername}) async {
     if (newUsername.isNotEmpty) {
       await authService.value.updateUsername(newUsername: newUsername);
+      if (mounted) {
+        Navigator.pop(context);
+        Navigator.pop(context, true);
+      }
     } else {
+      await Future.delayed(Durations.long4);
       print("Field is empty");
+      if (mounted) Navigator.pop(context);
     }
   }
 
