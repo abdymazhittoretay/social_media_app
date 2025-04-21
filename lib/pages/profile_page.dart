@@ -41,7 +41,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         MaterialPageRoute(
                           builder: (context) => UpdateUsernamePage(),
                         ),
-                      );
+                      ).then((wasChanged) async {
+                        if (wasChanged == true) {
+                          setState(() {});
+                        }
+                      });
                     },
                     icon: Icon(Icons.arrow_forward_ios),
                   ),
