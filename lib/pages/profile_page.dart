@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_media_app/pages/update_username_page.dart';
 import 'package:social_media_app/services/auth_service.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -35,7 +36,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   contentPadding: EdgeInsets.zero,
                   title: Text("Update username"),
                   trailing: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => UpdateUsernamePage(),
+                        ),
+                      );
+                    },
                     icon: Icon(Icons.arrow_forward_ios),
                   ),
                 ),
