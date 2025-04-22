@@ -6,7 +6,7 @@ final ValueNotifier<FirestoreService> authService = ValueNotifier(
 );
 
 class FirestoreService {
-  final CollectionReference _collection = FirebaseFirestore.instance.collection(
-    "collection",
+  final CollectionReference _posts = FirebaseFirestore.instance.collection(
+    "posts",
   );
 }
