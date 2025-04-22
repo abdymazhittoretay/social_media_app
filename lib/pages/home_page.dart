@@ -50,7 +50,27 @@ class _HomePageState extends State<HomePage> {
             return ListView.builder(
               itemCount: posts.length,
               itemBuilder: (context, index) {
-                return ListTile(title: Text(posts[index].content));
+                return Container(
+                  padding: EdgeInsets.all(16.0),
+                  margin: EdgeInsets.only(
+                    left: 16.0,
+                    right: 16.0,
+                    bottom: 12.0,
+                  ),
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[400],
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(posts[index].content),
+                      ),
+                    ],
+                  ),
+                );
               },
             );
           } else {
