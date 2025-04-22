@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:social_media_app/models/post_model.dart';
 
-final ValueNotifier<FirestoreService> authService = ValueNotifier(
+final ValueNotifier<FirestoreService> firestoreService = ValueNotifier(
   FirestoreService(),
 );
 
