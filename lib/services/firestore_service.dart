@@ -19,4 +19,10 @@ class FirestoreService {
       "timestamp": post.timestamp,
     });
   }
+
+  Stream<QuerySnapshot> getPosts() {
+    final postsSnapshot =
+        _posts.orderBy("timestamp", descending: true).snapshots();
+    return postsSnapshot;
+  }
 }
