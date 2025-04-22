@@ -54,6 +54,39 @@ class _HomePageState extends State<HomePage> {
           }
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          openDialog();
+        },
+      ),
+    );
+  }
+
+  void openDialog() {
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            shape: LinearBorder(),
+            content: TextField(
+              decoration: InputDecoration(hintText: "Your message to the feed"),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("Cancel"),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("Add"),
+              ),
+            ],
+          ),
     );
   }
 }
