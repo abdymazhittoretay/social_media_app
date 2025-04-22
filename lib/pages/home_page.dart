@@ -65,6 +65,23 @@ class _HomePageState extends State<HomePage> {
                   ),
                   child: Stack(
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(Icons.person, color: Colors.white),
+                              SizedBox(width: 6.0),
+                              Text(
+                                posts[index].username,
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                       Align(
                         alignment: Alignment.center,
                         child: Text(
