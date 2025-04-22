@@ -13,6 +13,7 @@ class FirestoreService {
 
   Future<void> addPost(PostModel post) {
     return _posts.add({
+      "email": post.email,
       "username": post.username,
       "content": post.content,
       "likes": post.likes,
