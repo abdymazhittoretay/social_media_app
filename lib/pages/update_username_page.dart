@@ -45,7 +45,7 @@ class _UpdateUsernamePageState extends State<UpdateUsernamePage> {
                   ),
                   onPressed: () {
                     loadDialog(context);
-                    updateUsername(newUsername: _controller.text);
+                    updateUsername(newUsername: _controller.text.trim());
                   },
                   child: Text("Update"),
                 ),
