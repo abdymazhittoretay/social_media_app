@@ -11,6 +11,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
@@ -35,6 +36,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 Spacer(),
                 Text(errorMessage, style: TextStyle(color: Colors.red)),
                 SizedBox(height: 6.0),
+                TextField(
+                  controller: _usernameController,
+                  decoration: InputDecoration(
+                    hintText: "Your username",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                SizedBox(height: 12.0),
                 TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
@@ -70,6 +79,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   onPressed: () {
                     loadDialog(context);
                     register(
+                      username: _usernameController.text,
                       email: _emailController.text,
                       password: _passwordController.text,
                       confirmPassword: _confirmPasswordController.text,
@@ -86,14 +96,19 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future<void> register({
+    required String username,
     required String email,
     required String password,
     required String confirmPassword,
   }) async {
-    if (email.isNotEmpty && password.isNotEmpty && confirmPassword.isNotEmpty) {
+    if (username.isNotEmpty &&
+        email.isNotEmpty &&
+        password.isNotEmpty &&
+        confirmPassword.isNotEmpty) {
       if (password == confirmPassword) {
         try {
           await authService.value.registerUserWithEmailAndPassword(
+            username: username,
             email: email,
             password: password,
           );
@@ -125,6 +140,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void dispose() {
+    _usernameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
