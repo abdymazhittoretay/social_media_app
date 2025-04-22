@@ -11,6 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final TextEditingController _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,17 +72,20 @@ class _HomePageState extends State<HomePage> {
           (context) => AlertDialog(
             shape: LinearBorder(),
             content: TextField(
+              controller: _controller,
               decoration: InputDecoration(hintText: "Your message to the feed"),
             ),
             actions: [
               TextButton(
                 onPressed: () {
+                  _controller.clear();
                   Navigator.pop(context);
                 },
                 child: Text("Cancel"),
               ),
               TextButton(
                 onPressed: () {
+                  _controller.clear();
                   Navigator.pop(context);
                 },
                 child: Text("Add"),
@@ -88,5 +93,11 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
