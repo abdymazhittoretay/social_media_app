@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:social_media_app/models/post_model.dart';
 import 'package:social_media_app/pages/profile_page.dart';
+import 'package:social_media_app/services/auth_service.dart';
 import 'package:social_media_app/services/firestore_service.dart';
 
 class HomePage extends StatefulWidget {
@@ -41,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                     email: doc["email"],
                     username: doc["username"],
                     content: doc["content"],
-                    timestamp: doc["timestam"],
+                    timestamp: doc["timestamp"],
                     likes: doc["likes"],
                   );
                 }).toList();
@@ -85,7 +87,22 @@ class _HomePageState extends State<HomePage> {
               ),
               TextButton(
                 onPressed: () {
-                  _controller.clear();
+                  if (_controller.text.isNotEmpty) {
+                    firestoreService.value.addPost(
+                      PostModel(
+                        email:
+                            authService.value.currentUser!.email ??
+                            "Error with email",
+                        username:
+                            authService.value.currentUser!.displayName ??
+                            "Error with username",
+                        content: _controller.text,
+                        timestamp: Timestamp.now(),
+                        likes: 0,
+                      ),
+                    );
+                    _controller.clear();
+                  }
                   Navigator.pop(context);
                 },
                 child: Text("Add"),
