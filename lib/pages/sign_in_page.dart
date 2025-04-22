@@ -57,8 +57,8 @@ class _SignInPageState extends State<SignInPage> {
                   onPressed: () {
                     loadDialog(context);
                     signIn(
-                      email: _emailController.text,
-                      password: _passwordController.text,
+                      email: _emailController.text.trim(),
+                      password: _passwordController.text.trim(),
                     );
                   },
                   child: Text("Sign In"),
