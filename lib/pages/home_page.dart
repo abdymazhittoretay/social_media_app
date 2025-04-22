@@ -50,23 +50,47 @@ class _HomePageState extends State<HomePage> {
             return ListView.builder(
               itemCount: posts.length,
               itemBuilder: (context, index) {
+                final DocumentSnapshot document = snapshot.data!.docs[index];
+                final String docID = document.id;
                 return Container(
-                  padding: EdgeInsets.all(16.0),
                   margin: EdgeInsets.only(
-                    left: 16.0,
-                    right: 16.0,
+                    left: 12.0,
+                    right: 12.0,
                     bottom: 12.0,
                   ),
                   height: 100,
                   decoration: BoxDecoration(
-                    color: Colors.grey[400],
+                    color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: Stack(
                     children: [
                       Align(
                         alignment: Alignment.center,
-                        child: Text(posts[index].content),
+                        child: Text(
+                          posts[index].content,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                firestoreService.value.addLike(docID);
+                              },
+                              icon: Icon(Icons.favorite, color: Colors.white),
+                            ),
+                            Text(
+                              posts[index].likes.toString(),
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
