@@ -25,4 +25,8 @@ class FirestoreService {
         _posts.orderBy("timestamp", descending: true).snapshots();
     return postsSnapshot;
   }
+
+  Future<void> addLike(String docID) async {
+    return _posts.doc(docID).update({"likes": FieldValue.increment(1)});
+  }
 }
