@@ -29,15 +29,19 @@ class FirestoreService {
     return postsSnapshot;
   }
 
+  Future<void> removePost(String docID) {
+    return _posts.doc(docID).delete();
+  }
+
   Future<void> addLike(String docID) async {
-    await _posts.doc(docID).update({
+    return _posts.doc(docID).update({
       "likes": FieldValue.increment(1),
       "whoLiked": FieldValue.arrayUnion([authService.value.currentUser!.email]),
     });
   }
 
   Future<void> removeLike(String docID) async {
-    await _posts.doc(docID).update({
+    return _posts.doc(docID).update({
       "likes": FieldValue.increment(-1),
       "whoLiked": FieldValue.arrayRemove([
         authService.value.currentUser!.email,

@@ -123,6 +123,17 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                       ),
+                      post.email == authService.value.currentUser!.email
+                          ? Align(
+                            alignment: Alignment.bottomRight,
+                            child: IconButton(
+                              onPressed: () async {
+                                await firestoreService.value.removePost(docID);
+                              },
+                              icon: Icon(Icons.delete, color: Colors.white),
+                            ),
+                          )
+                          : SizedBox(),
                     ],
                   ),
                 );
