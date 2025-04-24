@@ -6,6 +6,7 @@ class PostModel {
   final String content;
   final Timestamp timestamp;
   final int likes;
+  final List<dynamic> whoLiked;
 
   PostModel({
     required this.email,
@@ -13,5 +14,6 @@ class PostModel {
     required this.content,
     required this.timestamp,
     required this.likes,
+    required this.whoLiked,
   });
 }

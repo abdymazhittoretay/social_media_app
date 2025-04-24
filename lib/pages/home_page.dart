@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
                     content: doc["content"],
                     timestamp: doc["timestamp"],
                     likes: doc["likes"],
+                    whoLiked: doc["whoLiked"],
                   );
                 }).toList();
             return ListView.builder(
@@ -98,9 +99,23 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             IconButton(
                               onPressed: () {
-                                firestoreService.value.addLike(docID);
+                                if (posts[index].whoLiked.contains(
+                                  authService.value.currentUser!.email,
+                                )) {
+                                  firestoreService.value.removeLike(docID);
+                                } else {
+                                  firestoreService.value.addLike(docID);
+                                }
                               },
-                              icon: Icon(Icons.favorite, color: Colors.white),
+                              icon: Icon(
+                                posts[index].whoLiked.contains(
+                                      authService.value.currentUser!.email,
+                                    )
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+
+                                color: Colors.white,
+                              ),
                             ),
                             Text(
                               posts[index].likes.toString(),
@@ -160,6 +175,7 @@ class _HomePageState extends State<HomePage> {
                         content: _controller.text,
                         timestamp: Timestamp.now(),
                         likes: 0,
+                        whoLiked: [],
                       ),
                     );
                     _controller.clear();

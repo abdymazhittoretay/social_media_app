@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:social_media_app/models/post_model.dart';
+import 'package:social_media_app/services/auth_service.dart';
 
 final ValueNotifier<FirestoreService> firestoreService = ValueNotifier(
   FirestoreService(),
@@ -18,6 +19,7 @@ class FirestoreService {
       "content": post.content,
       "likes": post.likes,
       "timestamp": post.timestamp,
+      "whoLiked": post.whoLiked,
     });
   }
 
@@ -28,6 +30,18 @@ class FirestoreService {
   }
 
   Future<void> addLike(String docID) async {
-    return _posts.doc(docID).update({"likes": FieldValue.increment(1)});
+    await _posts.doc(docID).update({
+      "likes": FieldValue.increment(1),
+      "whoLiked": FieldValue.arrayUnion([authService.value.currentUser!.email]),
+    });
+  }
+
+  Future<void> removeLike(String docID) async {
+    await _posts.doc(docID).update({
+      "likes": FieldValue.increment(-1),
+      "whoLiked": FieldValue.arrayRemove([
+        authService.value.currentUser!.email,
+      ]),
+    });
   }
 }
