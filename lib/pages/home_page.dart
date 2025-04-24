@@ -77,6 +77,7 @@ class _HomePageState extends State<HomePage> {
           (context) => AlertDialog(
             shape: LinearBorder(),
             content: TextField(
+              autofocus: true,
               controller: _controller,
               decoration: InputDecoration(hintText: "Your message to the feed"),
             ),
