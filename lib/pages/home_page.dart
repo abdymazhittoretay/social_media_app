@@ -37,22 +37,21 @@ class _HomePageState extends State<HomePage> {
         stream: firestoreService.value.getPosts(),
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
-            final List<PostModel> posts =
-                snapshot.data!.docs.map((doc) {
-                  return PostModel(
-                    email: doc["email"],
-                    username: doc["username"],
-                    content: doc["content"],
-                    timestamp: doc["timestamp"],
-                    likes: doc["likes"],
-                    whoLiked: doc["whoLiked"],
-                  );
-                }).toList();
+            final docs = snapshot.data!.docs;
+
             return ListView.builder(
-              itemCount: posts.length,
+              itemCount: docs.length,
               itemBuilder: (context, index) {
-                final DocumentSnapshot document = snapshot.data!.docs[index];
+                final DocumentSnapshot document = docs[index];
                 final String docID = document.id;
+                final PostModel post = PostModel(
+                  email: document["email"],
+                  username: document["username"],
+                  content: document["content"],
+                  timestamp: document["timestamp"],
+                  likes: document["likes"],
+                  whoLiked: document["whoLiked"],
+                );
                 return Container(
                   margin: EdgeInsets.only(
                     left: 12.0,
@@ -76,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                               Icon(Icons.person, color: Colors.white),
                               SizedBox(width: 6.0),
                               Text(
-                                posts[index].username,
+                                post.username,
                                 style: TextStyle(color: Colors.white),
                               ),
                             ],
@@ -86,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                       Align(
                         alignment: Alignment.center,
                         child: Text(
-                          posts[index].content,
+                          post.content,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -99,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             IconButton(
                               onPressed: () {
-                                if (posts[index].whoLiked.contains(
+                                if (post.whoLiked.contains(
                                   authService.value.currentUser!.email,
                                 )) {
                                   firestoreService.value.removeLike(docID);
@@ -108,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                                 }
                               },
                               icon: Icon(
-                                posts[index].whoLiked.contains(
+                                post.whoLiked.contains(
                                       authService.value.currentUser!.email,
                                     )
                                     ? Icons.favorite
@@ -118,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             Text(
-                              posts[index].likes.toString(),
+                              post.likes.toString(),
                               style: TextStyle(color: Colors.white),
                             ),
                           ],
