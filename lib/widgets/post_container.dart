@@ -23,7 +23,7 @@ class PostContainer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: Align(
-              alignment: Alignment.topRight,
+              alignment: Alignment.topLeft,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
