@@ -34,7 +34,11 @@ class PostContainer extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(post.content, style: TextStyle(color: Colors.white)),
+            child: Text(
+              post.content,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
